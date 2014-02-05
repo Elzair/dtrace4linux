@@ -3,7 +3,7 @@ class dtrace4linux inherits dtrace4linux::params (
   $user = $dtrace4linux::params::user,
   $group = $dtrace4linux::params::group,
   $distro = $dtrace4linux::params::distro,
-  $module_file = $dtrace4linux::params::module_file,
+  $module_file = $dtrace4linux::params::module_file
 )
 {
   $path = [
