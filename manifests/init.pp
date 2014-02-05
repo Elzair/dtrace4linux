@@ -1,4 +1,4 @@
-class dtrace4linux inherit dtrace4linux::params (
+class dtrace4linux inherits dtrace4linux::params (
   $dev_dir = $dtrace4linux::params::dev_dir,
   $user = $dtrace4linux::params::user,
   $group = $dtrace4linux::params::group,
