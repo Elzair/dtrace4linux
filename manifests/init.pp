@@ -47,7 +47,7 @@ class dtrace4linux (
     }
 
     exec { "get-dtrace-deps":
-      command => "yes Y | $dev_dir/dtrace/tools/$getdeps.pl",
+      command => "yes Y | $dev_dir/dtrace/tools/$getdeps",
       path    => $path,
       logoutput => true,
       require => Exec["make get-deps.pl executable"],
