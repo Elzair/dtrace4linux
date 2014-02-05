@@ -1,15 +1,15 @@
 Puppet-DTrace4Linux
--------------------
+===================
 
 This puppet module will install DTrace on a Linux system.
 
 Installation
-============
+------------
 
 In the **modules** directory of your Puppet project, type `git clone https://github.com/Elzair/dtrace4linux.git`.
 
 Use
-===
+---
 
 You can instantiate the class **dtrace4linux** in the following way:
 
