@@ -1,7 +1,7 @@
 class dtrace4linux (
-  $dev_dir = $dtrace4linux::params::dev_dir,
   $user = $dtrace4linux::params::user,
   $group = $dtrace4linux::params::group,
+  $dev_dir = $dtrace4linux::params::dev_dir,
   $distro = $dtrace4linux::params::distro,
   $module_file = $dtrace4linux::params::module_file
 ) inherits dtrace4linux::params 
@@ -16,15 +16,6 @@ class dtrace4linux (
     "/bin",
   ]
 
-  package { "build-essential":
-    ensure => present,
-  }
-
-  package { "git":
-    ensure  => present,
-    require => Package["build-essential"],
-  }
-
   file { "dev_dir":
     ensure => directory,
     path   => $dev_dir,
@@ -37,7 +28,7 @@ class dtrace4linux (
     command   => "git clone https://github.com/dtrace4linux/linux.git $dev_dir/dtrace",
     path      => $path,
     logoutput => true,
-    require   => [ Package["git"], File["$dev_dir"] ],
+    require   => [ Class["config_build"], File["dev_dir"] ],
   }
 
   $getdeps = $distro ? {
@@ -52,7 +43,7 @@ class dtrace4linux (
       command => "chmod 0755 $dev_dir/dtrace/tools/$getdeps",
       path    => $path,
       logoutput => true,
-      require => Exec["chown devel"],
+      require => Exec["clone-dtrace4linux"],
     }
 
     exec { "get-dtrace-deps":
@@ -66,7 +57,7 @@ class dtrace4linux (
       command => "/bin/sh -c 'cd $dev_dir/dtrace && make all && make install && make load'",
       path    => $path,
       logoutput => true,
-      require => [ Package["build-essential"], Exec["get-dtrace-deps"] ],
+      require => [ Class["config_build"], Exec["get-dtrace-deps"] ],
     }
 
     exec { "place dtrace in module dir":

@@ -14,9 +14,9 @@ Use
 You can instantiate the class **dtrace4linux** in the following way:
 
     class { "dtrace4linux":
-      dev_dir     => "/home/example",
       user        => "example",
       group       => "example",
+      dev_dir     => "/home/example",
       distro      => "ubuntu",      # It also supports fedora, redhat, debian, and arch
       module_file => "/etc/modules" # file telling kernel what modules to load at boot
     }
