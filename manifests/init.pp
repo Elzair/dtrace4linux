@@ -41,10 +41,10 @@ class dtrace4linux (
   }
 
   $getdeps = $distro ? {
-    /(?i-mx:ubuntu|debian|mint)   => "get-deps.pl",
-    /(?i-mx:centos|redhat|fedora) => "get-deps-fedora.sh",
-    arch                          => "get-deps-arch.pl",
-    default                       => undef,
+    /(?i-mx:ubuntu|debian|mint)/   => "get-deps.pl",
+    /(?i-mx:centos|redhat|fedora)/ => "get-deps-fedora.sh",
+    arch                           => "get-deps-arch.pl",
+    default                        => undef,
   }
 
   if ($getdeps) {
