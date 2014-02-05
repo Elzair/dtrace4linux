@@ -70,7 +70,7 @@ class dtrace4linux (
     }
 
     exec { "place dtrace in module dir":
-      command => "cp $dev_dir/dtrace/build-$(uname -r)/driver/dtracedrv.ko /lib/modules/$(uname -r)/kernel/drivers/"
+      command => "cp $dev_dir/dtrace/build-$(uname -r)/driver/dtracedrv.ko /lib/modules/$(uname -r)/kernel/drivers/",
       path      => $path,
       logoutput => true,
       require   => Exec["install-dtrace4linux"],
