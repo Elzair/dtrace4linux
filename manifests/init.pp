@@ -3,6 +3,7 @@ class dtrace4linux inherit dtrace4linux::params (
   $user = $dtrace4linux::params::user,
   $group = $dtrace4linux::params::group,
   $distro = $dtrace4linux::params::distro,
+  $module_file = $dtrace4linux::params::module_file,
 )
 {
   $path = [
@@ -66,6 +67,20 @@ class dtrace4linux inherit dtrace4linux::params (
       path    => $path,
       logoutput => true,
       require => [ Package["build-essential"], Exec["get-dtrace-deps"] ],
+    }
+
+    exec { "place dtrace in module dir":
+      command => "cp $dev_dir/dtrace/build-$(uname -r)/driver/dtracedrv.ko /lib/modules/$(uname -r)/kernel/drivers/"
+      path      => $path,
+      logoutput => true,
+      require   => Exec["install-dtrace4linux"],
+    }
+
+    exec { "load dtrace module at boot":
+      command   => "/bin/sh -c 'echo dtrace4linux >> $module_file'",
+      path      => $path,
+      logoutput => true,
+      require   => Exec["place dtrace in module dir"],
     }
   }
   else {
