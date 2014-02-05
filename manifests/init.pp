@@ -1,10 +1,10 @@
-class dtrace4linux inherits dtrace4linux::params (
+class dtrace4linux (
   $dev_dir = $dtrace4linux::params::dev_dir,
   $user = $dtrace4linux::params::user,
   $group = $dtrace4linux::params::group,
   $distro = $dtrace4linux::params::distro,
   $module_file = $dtrace4linux::params::module_file
-)
+) inherits dtrace4linux::params 
 {
   $path = [
     "/opt/local/bin",
